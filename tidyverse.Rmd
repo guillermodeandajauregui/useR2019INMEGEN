@@ -1,0 +1,224 @@
+---
+title: "Notas del taller de Tidyverse"
+author: "Guilermo de Anda-Jáuregui"
+date: "February 26, 2019"
+output: github_document
+---
+
+
+# Microtaller de tidyverse
+
+Notas, basado en el material de Andrea Fernández Conde
+
+www.github.com/animalito/tidyverse-verbs
+
+
+## El ciclo de análisis de datos:
+Tomado del libro de Grolemund y Wickham
+
+1 Leer datos
+
+2 Limpiar (Tidy)
+
+El ciclo empieza:
+
+3 Transformar
+
+4 Visualizar
+
+5 Modelar 
+
+Sale del ciclo 
+
+* Comunicar
+
+# Lectura
+
+Varias opciones para acceder a datos de forma Tidy
+```{r, eval=FALSE}
+readr::read_delim()
+readr::read_csv()
+readxl::read_xlsx()
+
+```
+
+# dplyr
+
+## Los verbos de dplyr
+
+### Creación de resúmenes de datos
+
+* summarise_at
+
+### Nuevas variables
+
+* mutate
+* transmute 
+
+### Combinacion de conjuntos de datos
+
+* full_join
+* left_join
+* right_join
+* inner_join
+* intersect
+* union
+* anti_join
+* bind_rows
+* bind_cols
+
+### Agrupar datos
+
+* group_by
+
+#organizar 
+
+#reorganizar datos
+
+# Ejercicio
+
+Analizar los datos de vuelos de Nueva York
+
+```{r}
+library(nycflights13)
+library(vcdExtra)
+library(tidyverse)
+# Tablas con datos para ejercicios
+datasets("nycflights13")
+# Tabla para los ejercicios iniciales
+flights
+```
+
+## Filtrado de datos 
+
+Usar el verbo filter()
+
+Evaluaciones posibles:
+
+* Comparaciones: (`>, <, ==`)
+* Operadores lógicos: (`|, &, !, %in%`)
+* Datos perdidos (`is.na, is.NaN`)
+
+```{r}
+filter(flights, month == 1, day == 1)
+```
+
+## Los ejercicios:
+
+* retraso mayor de dos horas
+
+```{r}
+filter(flights, arr_delay > 120)
+```
+
+* Salen en Junio, Julio, Agosto
+
+```{r}
+filter(flights, month%in%c(6:8))
+```
+
+* ¿Cuántos NA en dep_time?
+
+```{r}
+filter(flights, is.na(dep_time)) %>% nrow()
+```
+
+## Selecciones 
+
+### seleccionar variables
+
+select()
+
+### seleccionar observaciones
+slice(), sample_n... 
+
+```{r}
+select(flights, origin, dest)
+slice(flights, 20:24)
+```
+
+## reorganizar
+
+arrange()
+
+## ejercicio
+
+* vuelos más largos? (top 10?)
+
+```{r}
+flights %>% 
+  arrange(desc(air_time)) %>% 
+  head(10) %>% 
+  select(flight, origin, dest)
+```
+
+
+## top_n 
+
+Función conveniente
+
+```{r}
+flights %>% 
+  top_n(air_time, 
+        n = -3) %>% 
+  select(air_time, origin, dest)
+```
+
+
+## Distinct 
+
+Remover duplicaciones
+```{r}
+distinct(bind_rows(flights, flights))
+```
+
+## Mutate
+
+Nuevas variables
+
+```{r}
+mutate(flights,
+       velocidad = distance / air_time * 60
+       )
+```
+
+* extraer el dia de time hour con stringr::str_sub
+
+```{r}
+flights %>% 
+  mutate(my_day = str_sub(string = time_hour, 
+                          start = 9, 
+                          end = 10)) %>% 
+  select(origin, dest, my_day) %>% 
+  head(10)
+  
+```
+
+## funciones ventana
+
+* lag(), lead(
+* aregados acumulativos cumsum(), cummean(
+* rankings()
+)
+
+## Summarize
+
+Cuando se quiere tener un resumen
+
+Colapsar un data.frame en una única fila resumen
+
+```{r}
+flights %>% 
+dplyr::summarise(dep_delay)
+```
+
+## Group by
+
+```{r}
+flights %>% 
+  group_by(month) %>% 
+  summarise(dep_delay.mean = mean(dep_delay, na.rm = TRUE))
+```
+Al agrupar, el comportamiento de los verbos cambia
+
+
