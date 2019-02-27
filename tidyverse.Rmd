@@ -222,3 +222,16 @@ flights %>%
 Al agrupar, el comportamiento de los verbos cambia
 
 
+## joins 
+
+TBC
+
+## Gather 
+
+TBC 
+
+
+## Tidying up - de sucio a limpio
+
+Pasar nombres de columnas a filas
+

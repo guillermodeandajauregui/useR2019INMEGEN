@@ -60,10 +60,10 @@ Esta es una red de interacciones de los personajes en la novela de *Los Miserabl
 
 **Colocar el archivo en el directorio de trabajo**
 
-Leamos la red usando read.graph
+## Leamos la red usando read.graph
 
 ```{r}
-g = read.graph(file = "les_mis.gml", format = "gml")
+g <- read.graph(file = "les_mis.gml", format = "gml")
 ```
 
 Considerar que existen varios tipos de formatos de redes. 
@@ -73,16 +73,17 @@ Examinemos nuestra red
 ```{r}
 g
 ```
-Nuestra red tiene 77 nodos, con 254 enlaces entre ellos. 
+Nuestra red tiene 77 nodos, con 254 enlaces entre ellos. Es una red *no dirigida* y *pesada*.
 
 Hagamos una primera visualización
 ```{r}
 plot(g)
 ```
+
 Esta visualización no es muy estética... ya la mejoraremos
 
 
-## Exportemos la red en varios formatos 
+## Exportemos la red en varios formatos
 
 ### Formato de RDS, solo útil para regresar a R
 
@@ -95,6 +96,7 @@ g.rds <- readRDS(file = "data/red_mis.RDS")
 g.rds
 ```
 
+## Exportemos con write.graph
 
 ### Formato de Graphml
 
@@ -122,5 +124,139 @@ write.graph(graph = g,
 g.edgelist <- read.graph(file = "red_mis.txt", 
                         format = "edgelist")
 g.edgelist
+```
+
+## ¿Hay una red en mi data.frame?
+
+Si.
+
+## Analicemos propiedades globales de la red
+
+* Componentes
+
+```{r}
+mis_componentes <- components(g)
+mis_componentes
+#mis componentes es una lista
+mis_componentes$no
+```
+
+* Longitud promedio de caminos más cortos
+
+```{r}
+mis_caminos <- average.path.length(g)
+mis_caminos
+```
+
+* Coeficiente de agrupamiento (*clustering coefficient*)
+
+```{r}
+mi_clustering <- transitivity(g, type = "global")
+mi_clustering
+```
+
+* Diámetro de la red y radio de la red
+
+```{r}
+mi_diametro <- diameter(g)
+mi_diametro
+mi_radio    <- radius(g)
+mi_radio
+```
+
+## analizar propiedades de los nodos 
+
+Accedamos a los nodos 
+```{r}
+V(g)
+V(g)$label
+```
+
+Podemos acceder a todas las propiedades del nodo en un data frame 
+
+```{r}
+mi_df_nodos <- get.data.frame(x = g, 
+                              what = "vertices")
+mi_df_nodos
+```
+
+Podemos asignar nuevas propiedades a los nodos  
+```{r}
+#hagamos una nueva propiedad, name, que sea una copia de label
+V(g)$name <- V(g)$label
+
+mi_df_nodos <- get.data.frame(x = g, 
+                              what = "vertices")
+mi_df_nodos
+```
+
+### Calculemos algunas medidas de centralidad
+
+* grado
+
+```{r}
+V(g)$grado <- degree(g)
+```
+
+* intermediación (*betweenness*)
+
+```{r}
+V(g)$intermediacion <- betweenness(g)
+```
+
+
+### Podemos tener también el coeficiente de agrupamiento local
+
+```{r}
+V(g)$agrupamiento <- transitivity(g, type = "local", isolates = "zero")
+```
+
+```{r}
+mi_df_nodos <- get.data.frame(x = g, 
+                              what = "vertices")
+mi_df_nodos
+```
+
+La distribución de grado es una propiedad muy importante de una red. Calculémosla
+
+```{r, message=FALSE}
+library(tidyverse)
+
+#uso dplyr para sacar frecuencias de valores de grado
+my_df <-
+mi_df_nodos %>% 
+  group_by(grado) %>% 
+  summarize(frecuencia = n()) %>% 
+  mutate(acumulada = cumsum(frecuencia)) %>% 
+  mutate(relativa = acumulada/max(acumulada)) %>% 
+  mutate(res.rel = 1 - relativa)   
+
+#grafico las frecuencias contra el valor de grado
+my_df %>%   
+  ggplot(mapping = aes(x = grado, 
+                       y = frecuencia)) +
+  geom_point() 
+
+#a veces me gusta ver la 1-acumulada
+my_df %>%   
+  ggplot(mapping = aes(x = grado, 
+                       y = res.rel)) +
+  geom_line() 
+
+#a veces me gusta verla en semilog()
+my_df %>%   
+  ggplot(mapping = aes(x = grado, 
+                       y = res.rel)) +
+  geom_line() + 
+  scale_y_log10()
+```
+
+## analizar propiedades de los enlaces
+
+Accedamos a los enlaces 
+```{r}
+E(g)
+mi_df_links <- get.data.frame(g, what = "edges")
+mi_df_links
 ```
 
