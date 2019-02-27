@@ -11,7 +11,7 @@ output: github_document
 Una red es un objeto matemático que tiene dos conjuntos:
 
 * Un conjunto de elementos, representados por *nodos*
-* Un conjunto de relaciones entre los elementos, representados por *aristas*
+* Un conjunto de relaciones entre los elementos, representados por *enlaces*
 
 ```{r, echo=FALSE, message=FALSE}
 library(igraph)
@@ -54,7 +54,7 @@ library(igraph)
 
 # Leer y escribir redes
 
-* Descargar datos de https://raw.githubusercontent.com/CSB-IG/curso_redes_2019-2/master/data_session03/les_mis.gml
+* Descargar datos de https://raw.githubusercontent.com/guillermodeandajauregui/useR2019INMEGEN/master/les_miserables.gml
 
 Esta es una red de interacciones de los personajes en la novela de *Los Miserables* (crédito: Donald Knuth, Mark Newman)
 
@@ -63,7 +63,7 @@ Esta es una red de interacciones de los personajes en la novela de *Los Miserabl
 ## Leamos la red usando read.graph
 
 ```{r}
-g <- read.graph(file = "les_mis.gml", format = "gml")
+g <- read.graph(file = "les_miserables.gml", format = "gml")
 ```
 
 Considerar que existen varios tipos de formatos de redes. 
@@ -73,7 +73,7 @@ Examinemos nuestra red
 ```{r}
 g
 ```
-Nuestra red tiene 77 nodos, con 254 enlaces entre ellos. Es una red *no dirigida* y *pesada*.
+Nuestra red tiene 77 nodos, con 254 enlaces entre ellos. Es una red *no dirigida* y *no pesada*.
 
 Hagamos una primera visualización
 ```{r}
@@ -89,6 +89,8 @@ Esta visualización no es muy estética... ya la mejoraremos
 
 ```{r}
 #guardar
+dir.create("data")
+
 saveRDS(object = g, 
         file = "data/red_mis.RDS")
 #volver a leer
@@ -256,7 +258,148 @@ my_df %>%
 Accedamos a los enlaces 
 ```{r}
 E(g)
+#podemos tener un data frame 
 mi_df_links <- get.data.frame(g, what = "edges")
 mi_df_links
+```
+
+Definamos una propiedad de enlaces 
+
+```{r}
+E(g)$intermediacion <- edge.betweenness(g)
+```
+
+Y obtenemos el data.frame
+```{r}
+mi_df_links <- get.data.frame(g, what = "edges")
+mi_df_links %>% head()
+```
+
+## Clustering --> Comunidades 
+
+Podemos usar la estructura de las redes para buscar un tipo especial de clusters llamados *comunidades*. Estas son, intuitivamente, conjuntos de nodos que comparten más enlaces entre ellos, que con nodos fuera del conjunto.
+
+
+
+Podemos usar diferentes algoritmos para detectar comunidades. 
+
+```{r}
+comm.louvain <- cluster_louvain(g)
+comm.louvain
+
+#podemos agregar la comunidad a la que pertenecen a cada nodo 
+V(g)$comm.louvain <- membership(comm.louvain)
+```
+Tenemos varios algoritmos implementados
+
+```{r}
+comm.infomap <- cluster_infomap(g)
+comm.walktrp <- cluster_walktrap(g)
+comm.fstgred <- cluster_fast_greedy(g)
+
+V(g)$comm.infomap <- membership(comm.infomap)
+V(g)$comm.walktrp <- membership(comm.walktrp)
+V(g)$comm.fstgred <- membership(comm.fstgred)
+```
+Extraigamos una vez más la tabla de nodos
+```{r}
+mi_df_nodos <- get.data.frame(x = g, 
+                              what = "vertices")
+mi_df_nodos %>% head()
+```
+
+## Hagamos unos plots
+
+```{r}
+plot(g, 
+     vertex.label.cex = 0.75,
+     vertex.size = degree(g), 
+     layout = layout_nicely
+     )
+```
+
+Genera una visualización con el tamaño de los nodos proporcional al grado, escogiendo heurísticamente el "mejor acomodo", y con el tamaño de las etiquetas más chico
+
+```{r}
+plot(g, 
+     vertex.label.cex = 0.75, 
+     edge.curved = TRUE, 
+     layout = layout_in_circle
+     )
+```
+
+Esta visualización acomoda los nodos en un círculo, y pone los enlaces curveados 
+---
+También podemos plotear objetos de comunidades 
+```{r}
+plot(comm.walktrp, 
+     g,  
+     vertex.label.cex = 0.75, 
+     layout = layout_nicely
+     )
+```
+
+## ¿Podemos hacer esto más Tidy?
+
+**Si podemos.** Usemos *tidygraph* para trabajar con las redes, y *ggraph* para nuestros plots 
+
+```{r}
+library(tidygraph)
+library(ggraph)
+```
+
+Los datos de redes no son Tidy... pero los datos de nodos Y los datos de enlaces pueden ser Tidy por separado. 
+---
+Convertimos nuestra red de igraph en una red de tidygraph
+
+```{r}
+gt <- as_tbl_graph(g)
+gt
+```
+
+Ahora tenemos el verbo activate para acceder a los datos de nodos o de aristas, y trabajar con ellos 
+---
+
+Agreguemos los agrupamientos de otro algoritmo de comunidades, *label propagation*
+```{r}
+gt <- gt %>% 
+        activate(what = "nodes") %>% 
+        mutate(comm.label_prop = group_label_prop())
+gt
+```
+
+O filtremos por la red para quedarnos con nodos que tengan al menos cinco vecinos
+```{r}
+gt_5 <- gt %>% 
+        activate(what = "nodes") %>% 
+        filter(grado > 5)
+gt_5
+```
+
+Ahora hagamos plots con *ggraph*
+
+```{r}
+gt %>% 
+  ggraph(layout = 'kk') + 
+  geom_edge_link(aes(), show.legend = FALSE) + 
+  geom_node_point(aes(colour = as.factor(comm.louvain)), size = 7) + 
+  guides(colour=guide_legend(title="Louvain community")) +
+  theme_graph()
+
+gt %>% 
+  ggraph(layout = 'kk') + 
+  geom_edge_link(aes(), show.legend = FALSE) + 
+  geom_node_point(aes(colour = as.factor(comm.infomap)), size = 7) + 
+  guides(colour=guide_legend(title="Infomap community")) +
+  theme_graph()
+```
+
+```{r}
+gt_5%>% 
+  ggraph(layout = 'kk') + 
+  geom_edge_link(aes(), show.legend = FALSE) + 
+  geom_node_point(aes(colour = as.factor(comm.walktrp)), size = 7) + 
+  guides(colour=guide_legend(title="Walktrap community")) +
+  theme_graph()
 ```
 
