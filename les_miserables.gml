@@ -1,5 +1,4 @@
-Creator "igraph version 1.2.2 Tue Feb 26 18:35:15 2019"
-Version 1
+Creator "Mark Newman on Fri Jul 21 12:44:53 2006 modified Guillermo de Anda-Jáuregui February 2019"
 graph
 [
   directed 0
