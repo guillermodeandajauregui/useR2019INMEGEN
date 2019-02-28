@@ -130,7 +130,33 @@ g.edgelist
 
 ## ¿Hay una red en mi data.frame?
 
-Si.
+**Si.**
+
+Descargar estos datos:
+
+https://raw.githubusercontent.com/guillermodeandajauregui/useR2019INMEGEN/master/movies.csv
+
+```{r}
+movies   <- read.csv("movies.csv")
+head(movies)
+g.movies <- graph_from_data_frame(d = movies, directed = FALSE)
+g.movies
+```
+
+```{r, echo=FALSE}
+library(ggraph)
+
+V(g.movies)$type <- ifelse(V(g.movies)$name%in%unique(movies$movie), "movie", "person")
+
+ggraph(graph = g.movies) + 
+  geom_edge_link(aes(), show.legend = FALSE) + 
+  geom_node_point(aes(colour = as.factor(type)), size = 7) + 
+  theme_graph()
+```
+
+Dejemos esta red para otro momento... 
+
+Recordar: si tenemos un data set con dos columnas que puedan representarse como factores, en principio tenemos alguna estructura de relaciones que podemos representar como una red.  ¿Es una red interesante? *No lo sabemos*.
 
 ## Analicemos propiedades globales de la red
 

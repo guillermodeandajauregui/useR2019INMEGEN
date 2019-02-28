@@ -2,27 +2,27 @@ Análisis de redes con R
 ================
 Guilermo de Anda-Jáuregui
 
-Análisis de redes
-=================
+# Análisis de redes
 
-¿Qué es una red?
-================
+# ¿Qué es una red?
 
 Una red es un objeto matemático que tiene dos conjuntos:
 
--   Un conjunto de elementos, representados por *nodos*
--   Un conjunto de relaciones entre los elementos, representados por *enlaces*
+  - Un conjunto de elementos, representados por *nodos*
+  - Un conjunto de relaciones entre los elementos, representados por
+    *enlaces*
 
-![](redes_files/figure-markdown_github/unnamed-chunk-2-1.png)
+![](redes_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
 
-¿Qué haremos hoy?
-=================
+# ¿Qué haremos hoy?
 
 1 Leer una red (y escribirla, de una vez)
 
-2 Describir la red: tamaño, caminos mas cortos, número de componentes, etc.
+2 Describir la red: tamaño, caminos mas cortos, número de componentes,
+etc.
 
-3 Estudiar propiedades de los nodos: centralidades, coeficientes de agrupamiento locales, etc.
+3 Estudiar propiedades de los nodos: centralidades, coeficientes de
+agrupamiento locales, etc.
 
 4 Estudiar propiedades de los enlaces: intermediacion
 
@@ -32,8 +32,7 @@ Una red es un objeto matemático que tiene dos conjuntos:
 
 7 Hacerlo *tidy*
 
-Iniciemos
-=========
+# Iniciemos
 
 carguemos el paquete igraph
 
@@ -41,17 +40,17 @@ carguemos el paquete igraph
 library(igraph)
 ```
 
-Leer y escribir redes
-=====================
+# Leer y escribir redes
 
--   Descargar datos de <https://raw.githubusercontent.com/guillermodeandajauregui/useR2019INMEGEN/master/les_miserables.gml>
+  - Descargar datos de
+    <https://raw.githubusercontent.com/guillermodeandajauregui/useR2019INMEGEN/master/les_miserables.gml>
 
-Esta es una red de interacciones de los personajes en la novela de *Los Miserables* (crédito: Donald Knuth, Mark Newman)
+Esta es una red de interacciones de los personajes en la novela de *Los
+Miserables* (crédito: Donald Knuth, Mark Newman)
 
 **Colocar el archivo en el directorio de trabajo**
 
-Leamos la red usando read.graph
--------------------------------
+## Leamos la red usando read.graph
 
 ``` r
 g <- read.graph(file = "les_miserables.gml", format = "gml")
@@ -65,9 +64,9 @@ Examinemos nuestra red
 g
 ```
 
-    ## IGRAPH 5643230 U--- 77 254 -- 
+    ## IGRAPH e2a34c4 U--- 77 254 -- 
     ## + attr: id (v/n), label (v/c)
-    ## + edges from 5643230:
+    ## + edges from e2a34c4:
     ##  [1]  1-- 2  1-- 3  1-- 4  3-- 4  1-- 5  1-- 6  1-- 7  1-- 8  1-- 9  1--10
     ## [11] 11--12  4--12  3--12  1--12 12--13 12--14 12--15 12--16 17--18 17--19
     ## [21] 18--19 17--20 18--20 19--20 17--21 18--21 19--21 20--21 17--22 18--22
@@ -78,7 +77,8 @@ g
     ## [71] 24--32 28--32 12--33 12--34 28--34 12--35 30--35 12--36 35--36 30--36
     ## + ... omitted several edges
 
-Nuestra red tiene 77 nodos, con 254 enlaces entre ellos. Es una red *no dirigida* y *no pesada*.
+Nuestra red tiene 77 nodos, con 254 enlaces entre ellos. Es una red *no
+dirigida* y *no pesada*.
 
 Hagamos una primera visualización
 
@@ -86,12 +86,11 @@ Hagamos una primera visualización
 plot(g)
 ```
 
-![](redes_files/figure-markdown_github/unnamed-chunk-6-1.png)
+![](redes_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
 
-Esta visualización no es muy estética... ya la mejoraremos
+Esta visualización no es muy estética… ya la mejoraremos
 
-Exportemos la red en varios formatos
-------------------------------------
+## Exportemos la red en varios formatos
 
 ### Formato de RDS, solo útil para regresar a R
 
@@ -110,9 +109,9 @@ g.rds <- readRDS(file = "data/red_mis.RDS")
 g.rds
 ```
 
-    ## IGRAPH 5643230 U--- 77 254 -- 
+    ## IGRAPH e2a34c4 U--- 77 254 -- 
     ## + attr: id (v/n), label (v/c)
-    ## + edges from 5643230:
+    ## + edges from e2a34c4:
     ##  [1]  1-- 2  1-- 3  1-- 4  3-- 4  1-- 5  1-- 6  1-- 7  1-- 8  1-- 9  1--10
     ## [11] 11--12  4--12  3--12  1--12 12--13 12--14 12--15 12--16 17--18 17--19
     ## [21] 18--19 17--20 18--20 19--20 17--21 18--21 19--21 20--21 17--22 18--22
@@ -123,8 +122,7 @@ g.rds
     ## [71] 24--32 28--32 12--33 12--34 28--34 12--35 30--35 12--36 35--36 30--36
     ## + ... omitted several edges
 
-Exportemos con write.graph
---------------------------
+## Exportemos con write.graph
 
 ### Formato de Graphml
 
@@ -140,9 +138,9 @@ g.graphml <- read.graph(file = "red_mis.graphml",
 g.graphml
 ```
 
-    ## IGRAPH 81d66b1 U--- 77 254 -- 
+    ## IGRAPH 49d0aac U--- 77 254 -- 
     ## + attr: id (v/n), label (v/c)
-    ## + edges from 81d66b1:
+    ## + edges from 49d0aac:
     ##  [1]  1-- 2  1-- 3  1-- 4  3-- 4  1-- 5  1-- 6  1-- 7  1-- 8  1-- 9  1--10
     ## [11] 11--12  4--12  3--12  1--12 12--13 12--14 12--15 12--16 17--18 17--19
     ## [21] 18--19 17--20 18--20 19--20 17--21 18--21 19--21 20--21 17--22 18--22
@@ -167,8 +165,8 @@ g.edgelist <- read.graph(file = "red_mis.txt",
 g.edgelist
 ```
 
-    ## IGRAPH b392c12 D--- 77 254 -- 
-    ## + edges from b392c12:
+    ## IGRAPH fb3bfc1 D--- 77 254 -- 
+    ## + edges from fb3bfc1:
     ##  [1]  1-> 2  1-> 3  1-> 4  1-> 5  1-> 6  1-> 7  1-> 8  1-> 9  1->10  1->12
     ## [11]  3-> 4  3->12  4->12 11->12 12->13 12->14 12->15 12->16 12->24 12->25
     ## [21] 12->26 12->27 12->28 12->29 12->30 12->32 12->33 12->34 12->35 12->36
@@ -180,15 +178,62 @@ g.edgelist
     ## [81] 24->30 24->31 24->32 25->26 25->27 25->28 25->42 25->43 25->51 25->69
     ## + ... omitted several edges
 
-¿Hay una red en mi data.frame?
-------------------------------
+## ¿Hay una red en mi data.frame?
 
-Si.
+**Si.**
 
-Analicemos propiedades globales de la red
------------------------------------------
+Descargar estos
+datos:
 
--   Componentes
+<https://raw.githubusercontent.com/guillermodeandajauregui/useR2019INMEGEN/master/movies.csv>
+
+``` r
+movies   <- read.csv("movies.csv")
+head(movies)
+```
+
+    ##               person      movie billing  role
+    ## 1    Viggo Mortensen green book       1 actor
+    ## 2     Mahershala Ali green book       2 actor
+    ## 3   Linda Cardellini green book       3 actor
+    ## 4 Dimiter D. Marinov green book       4 actor
+    ## 5        Mike Hatton green book       5 actor
+    ## 6        Iqbal Theba green book       6 actor
+
+``` r
+g.movies <- graph_from_data_frame(d = movies, directed = FALSE)
+g.movies
+```
+
+    ## IGRAPH ec23e13 UN-- 284 290 -- 
+    ## + attr: name (v/c), billing (e/n), role (e/c)
+    ## + edges from ec23e13 (vertex names):
+    ##  [1] Viggo Mortensen     --green book Mahershala Ali      --green book
+    ##  [3] Linda Cardellini    --green book Dimiter D. Marinov  --green book
+    ##  [5] Mike Hatton         --green book Iqbal Theba         --green book
+    ##  [7] Sebastian Maniscalco--green book Von Lewis           --green book
+    ##  [9] P.J. Byrne          --green book Montrel Miller      --green book
+    ## [11] Tom Virtue          --green book Don Stark           --green book
+    ## [13] Brian Stepanek      --green book Dennis W. Hall      --green book
+    ## [15] Randal Gonzalez     --green book Maggie Nixon        --green book
+    ## + ... omitted several edges
+
+    ## Using `nicely` as default layout
+
+![](redes_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
+
+Dejemos esta red para otro momento…
+
+Recordar: si tenemos un data set con dos columnas que puedan
+representarse como factores, en principio tenemos alguna estructura de
+relaciones que podemos representar como una red. ¿Es una red
+interesante? *No lo sabemos*.
+
+## Analicemos propiedades globales de la red
+
+  - Componentes
+
+<!-- end list -->
 
 ``` r
 mis_componentes <- components(g)
@@ -213,7 +258,9 @@ mis_componentes$no
 
     ## [1] 1
 
--   Longitud promedio de caminos más cortos
+  - Longitud promedio de caminos más cortos
+
+<!-- end list -->
 
 ``` r
 mis_caminos <- average.path.length(g)
@@ -222,7 +269,9 @@ mis_caminos
 
     ## [1] 2.641148
 
--   Coeficiente de agrupamiento (*clustering coefficient*)
+  - Coeficiente de agrupamiento (*clustering coefficient*)
+
+<!-- end list -->
 
 ``` r
 mi_clustering <- transitivity(g, type = "global")
@@ -231,7 +280,9 @@ mi_clustering
 
     ## [1] 0.4989316
 
--   Diámetro de la red y radio de la red
+  - Diámetro de la red y radio de la red
+
+<!-- end list -->
 
 ``` r
 mi_diametro <- diameter(g)
@@ -247,8 +298,7 @@ mi_radio
 
     ## [1] 3
 
-analizar propiedades de los nodos
----------------------------------
+## analizar propiedades de los nodos
 
 Accedamos a los nodos
 
@@ -256,7 +306,7 @@ Accedamos a los nodos
 V(g)
 ```
 
-    ## + 77/77 vertices, from 5643230:
+    ## + 77/77 vertices, from e2a34c4:
     ##  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23
     ## [24] 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46
     ## [47] 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69
@@ -472,13 +522,17 @@ mi_df_nodos
 
 ### Calculemos algunas medidas de centralidad
 
--   grado
+  - grado
+
+<!-- end list -->
 
 ``` r
 V(g)$grado <- degree(g)
 ```
 
--   intermediación (*betweenness*)
+  - intermediación (*betweenness*)
+
+<!-- end list -->
 
 ``` r
 V(g)$intermediacion <- betweenness(g)
@@ -653,7 +707,8 @@ mi_df_nodos
     ## Brujon             0.90476190
     ## MmeHucheloup       1.00000000
 
-La distribución de grado es una propiedad muy importante de una red. Calculémosla
+La distribución de grado es una propiedad muy importante de una red.
+Calculémosla
 
 ``` r
 library(tidyverse)
@@ -674,7 +729,7 @@ my_df %>%
   geom_point() 
 ```
 
-![](redes_files/figure-markdown_github/unnamed-chunk-21-1.png)
+![](redes_files/figure-gfm/unnamed-chunk-23-1.png)<!-- -->
 
 ``` r
 #a veces me gusta ver la 1-acumulada
@@ -684,7 +739,7 @@ my_df %>%
   geom_line() 
 ```
 
-![](redes_files/figure-markdown_github/unnamed-chunk-21-2.png)
+![](redes_files/figure-gfm/unnamed-chunk-23-2.png)<!-- -->
 
 ``` r
 #a veces me gusta verla en semilog()
@@ -697,10 +752,9 @@ my_df %>%
 
     ## Warning: Transformation introduced infinite values in continuous y-axis
 
-![](redes_files/figure-markdown_github/unnamed-chunk-21-3.png)
+![](redes_files/figure-gfm/unnamed-chunk-23-3.png)<!-- -->
 
-analizar propiedades de los enlaces
------------------------------------
+## analizar propiedades de los enlaces
 
 Accedamos a los enlaces
 
@@ -708,7 +762,7 @@ Accedamos a los enlaces
 E(g)
 ```
 
-    ## + 254/254 edges from 5643230 (vertex names):
+    ## + 254/254 edges from e2a34c4 (vertex names):
     ##  [1] Myriel        --Napoleon       Myriel        --MlleBaptistine
     ##  [3] Myriel        --MmeMagloire    MlleBaptistine--MmeMagloire   
     ##  [5] Myriel        --CountessDeLo   Myriel        --Geborand      
@@ -1004,10 +1058,12 @@ mi_df_links %>% head()
     ## 5         Myriel   CountessDeLo             76
     ## 6         Myriel       Geborand             76
 
-Clustering --&gt; Comunidades
------------------------------
+## Clustering –\> Comunidades
 
-Podemos usar la estructura de las redes para buscar un tipo especial de clusters llamados *comunidades*. Estas son, intuitivamente, conjuntos de nodos que comparten más enlaces entre ellos, que con nodos fuera del conjunto.
+Podemos usar la estructura de las redes para buscar un tipo especial de
+clusters llamados *comunidades*. Estas son, intuitivamente, conjuntos de
+nodos que comparten más enlaces entre ellos, que con nodos fuera del
+conjunto.
 
 Podemos usar diferentes algoritmos para detectar comunidades.
 
@@ -1077,8 +1133,7 @@ mi_df_nodos %>% head()
     ## CountessDeLo              3
     ## Geborand                  3
 
-Hagamos unos plots
-------------------
+## Hagamos unos plots
 
 ``` r
 plot(g, 
@@ -1088,9 +1143,11 @@ plot(g,
      )
 ```
 
-![](redes_files/figure-markdown_github/unnamed-chunk-28-1.png)
+![](redes_files/figure-gfm/unnamed-chunk-30-1.png)<!-- -->
 
-Genera una visualización con el tamaño de los nodos proporcional al grado, escogiendo heurísticamente el "mejor acomodo", y con el tamaño de las etiquetas más chico
+Genera una visualización con el tamaño de los nodos proporcional al
+grado, escogiendo heurísticamente el “mejor acomodo”, y con el tamaño de
+las etiquetas más chico
 
 ``` r
 plot(g, 
@@ -1100,10 +1157,9 @@ plot(g,
      )
 ```
 
-![](redes_files/figure-markdown_github/unnamed-chunk-29-1.png)
+![](redes_files/figure-gfm/unnamed-chunk-31-1.png)<!-- -->
 
-Esta visualización acomoda los nodos en un círculo, y pone los enlaces curveados
---------------------------------------------------------------------------------
+## Esta visualización acomoda los nodos en un círculo, y pone los enlaces curveados
 
 También podemos plotear objetos de comunidades
 
@@ -1115,20 +1171,19 @@ plot(comm.walktrp,
      )
 ```
 
-![](redes_files/figure-markdown_github/unnamed-chunk-30-1.png)
+![](redes_files/figure-gfm/unnamed-chunk-32-1.png)<!-- -->
 
-¿Podemos hacer esto más Tidy?
------------------------------
+## ¿Podemos hacer esto más Tidy?
 
-**Si podemos.** Usemos *tidygraph* para trabajar con las redes, y *ggraph* para nuestros plots
+**Si podemos.** Usemos *tidygraph* para trabajar con las redes, y
+*ggraph* para nuestros plots
 
 ``` r
 library(tidygraph)
 library(ggraph)
 ```
 
-Los datos de redes no son Tidy... pero los datos de nodos Y los datos de enlaces pueden ser Tidy por separado.
---------------------------------------------------------------------------------------------------------------
+## Los datos de redes no son Tidy… pero los datos de nodos Y los datos de enlaces pueden ser Tidy por separado.
 
 Convertimos nuestra red de igraph en una red de tidygraph
 
@@ -1161,10 +1216,10 @@ gt
     ## 3     1     4              8
     ## # … with 251 more rows
 
-Ahora tenemos el verbo activate para acceder a los datos de nodos o de aristas, y trabajar con ellos
-----------------------------------------------------------------------------------------------------
+## Ahora tenemos el verbo activate para acceder a los datos de nodos o de aristas, y trabajar con ellos
 
-Agreguemos los agrupamientos de otro algoritmo de comunidades, *label propagation*
+Agreguemos los agrupamientos de otro algoritmo de comunidades, *label
+propagation*
 
 ``` r
 gt <- gt %>% 
@@ -1197,7 +1252,8 @@ gt
     ## 3     1     4              8
     ## # … with 251 more rows
 
-O filtremos por la red para quedarnos con nodos que tengan al menos cinco vecinos
+O filtremos por la red para quedarnos con nodos que tengan al menos
+cinco vecinos
 
 ``` r
 gt_5 <- gt %>% 
@@ -1241,7 +1297,7 @@ gt %>%
   theme_graph()
 ```
 
-![](redes_files/figure-markdown_github/unnamed-chunk-35-1.png)
+![](redes_files/figure-gfm/unnamed-chunk-37-1.png)<!-- -->
 
 ``` r
 gt %>% 
@@ -1252,7 +1308,7 @@ gt %>%
   theme_graph()
 ```
 
-![](redes_files/figure-markdown_github/unnamed-chunk-35-2.png)
+![](redes_files/figure-gfm/unnamed-chunk-37-2.png)<!-- -->
 
 ``` r
 gt_5%>% 
@@ -1263,4 +1319,4 @@ gt_5%>%
   theme_graph()
 ```
 
-![](redes_files/figure-markdown_github/unnamed-chunk-36-1.png)
+![](redes_files/figure-gfm/unnamed-chunk-38-1.png)<!-- -->
