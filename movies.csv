@@ -1,0 +1,291 @@
+person,movie,billing,role
+Viggo Mortensen,green book,1,actor
+Mahershala Ali,green book,2,actor
+Linda Cardellini,green book,3,actor
+Dimiter D. Marinov,green book,4,actor
+Mike Hatton,green book,5,actor
+Iqbal Theba,green book,6,actor
+Sebastian Maniscalco,green book,7,actor
+Von Lewis,green book,8,actor
+P.J. Byrne,green book,9,actor
+Montrel Miller,green book,10,actor
+Tom Virtue,green book,11,actor
+Don Stark,green book,12,actor
+Brian Stepanek,green book,13,actor
+Dennis W. Hall,green book,14,actor
+Randal Gonzalez,green book,15,actor
+Maggie Nixon,green book,16,actor
+Brian Distance,green book,17,actor
+Chadwick Boseman,black panther,1,actor
+Michael B. Jordan,black panther,2,actor
+Lupita Nyong'o,black panther,3,actor
+Danai Gurira,black panther,4,actor
+Martin Freeman,black panther,5,actor
+Daniel Kaluuya,black panther,6,actor
+Letitia Wright,black panther,7,actor
+Winston Duke,black panther,8,actor
+Sterling K. Brown,black panther,9,actor
+Angela Bassett,black panther,10,actor
+Forest Whitaker,black panther,11,actor
+Andy Serkis,black panther,12,actor
+Florence Kasumba,black panther,13,actor
+John Kani,black panther,14,actor
+David S. Lee,black panther,15,actor
+John David Washington,blackkklansman,1,actor
+Adam Driver,blackkklansman,2,actor
+Laura Harrier,blackkklansman,3,actor
+Topher Grace,blackkklansman,4,actor
+Jasper Pääkkönen,blackkklansman,5,actor
+Ryan Eggold,blackkklansman,6,actor
+Paul Walter Hauser,blackkklansman,7,actor
+Ashlie Atkinson,blackkklansman,8,actor
+Corey Hawkins,blackkklansman,9,actor
+Michael Buscemi,blackkklansman,10,actor
+Ken Garito,blackkklansman,11,actor
+Robert John Burke,blackkklansman,12,actor
+Fred Weller,blackkklansman,13,actor
+Nicholas Turturro,blackkklansman,14,actor
+Harry Belafonte,blackkklansman,15,actor
+Alec Baldwin,blackkklansman,16,actor
+Isiah Whitlock Jr.,blackkklansman,17,actor
+Damaris Lewis,blackkklansman,18,actor
+Rami Malek,bohemian rhapsody,1,actor
+Lucy Boynton,bohemian rhapsody,2,actor
+Gwilym Lee,bohemian rhapsody,3,actor
+Ben Hardy,bohemian rhapsody,4,actor
+Joe Mazzello,bohemian rhapsody,5,actor
+Allen Leech,bohemian rhapsody,6,actor
+Aidan Gillen,bohemian rhapsody,7,actor
+Tom Hollander,bohemian rhapsody,8,actor
+Mike Myers,bohemian rhapsody,9,actor
+Aaron McCusker,bohemian rhapsody,10,actor
+Meneka Das,bohemian rhapsody,11,actor
+Ace Bhatti,bohemian rhapsody,12,actor
+Priya Blackburn,bohemian rhapsody,13,actor
+Tim Plester,bohemian rhapsody,14,actor
+Dermot Murphy,bohemian rhapsody,15,actor
+Dickie Beau,bohemian rhapsody,16,actor
+Jack Roth,bohemian rhapsody,17,actor
+Max Bennett,bohemian rhapsody,18,actor
+Neil Fox-Roberts,bohemian rhapsody,19,actor
+Michelle Duncan,bohemian rhapsody,20,actor
+Adam Lambert,bohemian rhapsody,21,actor
+Olivia Colman,the favourite,1,actor
+Emma Stone,the favourite,2,actor
+Rachel Weisz,the favourite,3,actor
+Nicholas Hoult,the favourite,4,actor
+Joe Alwyn,the favourite,5,actor
+Mark Gatiss,the favourite,6,actor
+James Smith,the favourite,7,actor
+Jenny Rainsford,the favourite,8,actor
+Yalitza Aparicio,roma,1,actor
+Marina de Tavira,roma,2,actor
+Fernando Grediaga,roma,3,actor
+Jorge Antonio Guerrero,roma,4,actor
+Marco Graf,roma,5,actor
+Daniela Demesa,roma,6,actor
+Diego Cortina Autrey,roma,7,actor
+Carlos Peralta,roma,8,actor
+Nancy García,roma,9,actor
+Verónica García,roma,10,actor
+José Manuel Guerrero Mendoza,roma,11,actor
+Latin Lover,roma,12,actor
+Alfonso Cuaron,roma,0,director
+Lady Gaga,a star is born,1,actor
+Bradley Cooper,a star is born,2,actor
+Sam Elliott,a star is born,3,actor
+Dave Chappelle,a star is born,4,actor
+Andrew Dice Clay,a star is born,5,actor
+Anthony Ramos,a star is born,6,actor
+Rafi Gavron,a star is born,7,actor
+Greg Grunberg,a star is born,8,actor
+Christian Bale,vice,1,actor
+Alex MacNicoll and Aidan Gail,vice,2,actor
+Amy Adams,vice,3,actor
+Cailee Spaeny,vice,4,actor
+Steve Carell,vice,5,actor
+Sam Rockwell,vice,6,actor
+Alison Pill,vice,7,actor
+Colyse Harger,vice,8,actor
+Lily Rabe,vice,9,actor
+Violet Hicks,vice,10,actor
+Jesse Plemons,vice,11,actor
+Tyler Perry,vice,12,actor
+Justin Kirk,vice,13,actor
+LisaGay Hamilton,vice,14,actor
+Eddie Marsan,vice,15,actor
+Bill Camp,vice,16,actor
+Don McManus,vice,17,actor
+Stephen Adly Guirgis,vice,18,actor
+Matthew Jacobs,vice,19,actor
+Adam Bartley,vice,20,actor
+Kirk Bovill,vice,21,actor
+Jillian Armenante,vice,22,actor
+Fay Masterson,vice,23,actor
+Shea Whigham,vice,24,actor
+Alfred Molina,vice,25,actor
+Naomi Watts,vice,26,actor
+Joseph Beck,vice,27,actor
+Paul Perri,vice,28,actor
+Camille James Harman,vice,29,actor
+Adam McKay,vice,0,director
+Spike Lee,blackkklansman,0,director
+Peter Farrelly,green book,0,director
+Ryan Coogler,black panther,0,director
+Bryan Singer,bohemian rhapsody,0,director
+Yorgos Santhimos,the favourite,0,director
+Clive Owen,children of men,1,actor
+Julianne Moore,children of men,2,actor
+Clare-Hope Ashitey,children of men,3,actor
+Michael Caine,children of men,4,actor
+Chiwetel Ejiofor,children of men,5,actor
+Charlie Hunnam,children of men,6,actor
+Pam Ferris,children of men,7,actor
+Peter Mullan,children of men,8,actor
+Danny Huston,children of men,9,actor
+Oana Pellea,children of men,10,actor
+Paul Sharma,children of men,11,actor
+Jacek Koman,children of men,12,actor
+Alfonso Cuaron,children of men,0,director
+Alfonso Cuaron,gravity,0,director
+Sandra Bullock,gravity,1,actor
+George Clooney,gravity,2,actor
+Michael B. Jordan,fruitvale station,1,actor
+Melonie Diaz,fruitvale station,2,actor
+Kevin Durand,fruitvale station,3,actor
+Chad Michael Murray,fruitvale station,4,actor
+Ahna O'Reilly,fruitvale station,5,actor
+Octavia Spencer,fruitvale station,6,actor
+Trestin George,fruitvale station,7,actor
+Thomas Wright,fruitvale station,8,actor
+Keegan Coogler,fruitvale station,9,actor
+Kenny Grimm,fruitvale station,10,actor
+Jemal McNeil,fruitvale station,11,actor
+Julian Keyes,fruitvale station,12,actor
+Banica Rodrigeuz III,fruitvale station,13,actor
+Ariana Neal,fruitvale station,14,actor
+Marjorie Crump-Shears,fruitvale station,15,actor
+Michael James,fruitvale station,16,actor
+Steven C. Johnson,fruitvale station,17,actor
+Alejandra Nolasco,fruitvale station,18,actor
+Alessandro Garcia,fruitvale station,19,actor
+Marvin Greene,fruitvale station,20,actor
+Laurel Moglen,fruitvale station,21,actor
+Victor Toman,fruitvale station,22,actor
+Herman Tsui,fruitvale station,23,actor
+Liisa Cohen,fruitvale station,24,actor
+Darren Bridgett,fruitvale station,25,actor
+Caroline Lesley,fruitvale station,26,actor
+Lucena Herrera,fruitvale station,27,actor
+Brian Richardson,fruitvale station,28,actor
+Razon Tramble,fruitvale station,29,actor
+Maya Tapia,fruitvale station,30,actor
+Destiny Ekwueme,fruitvale station,31,actor
+Nassir Zughayer,fruitvale station,32,actor
+Wanda Johnson,fruitvale station,33,actor
+Christina Elmore,fruitvale station,34,actor
+Tamera Tomakili,fruitvale station,35,actor
+Chris Riedell,fruitvale station,36,actor
+Denzel Worthington,fruitvale station,37,actor
+Charmaine Davis,fruitvale station,38,actor
+Jonez Cain,fruitvale station,39,actor
+Jasmin Bristow,fruitvale station,40,actor
+Chris Mocorro,fruitvale station,41,actor
+Robert Ajlouny,fruitvale station,42,actor
+Noah Staggs,fruitvale station,43,actor
+William T. Bayley,fruitvale station,44,actor
+Jennifer Nicole,fruitvale station,45,actor
+Joey Oglesby,fruitvale station,46,actor
+Lola Preza,fruitvale station,47,actor
+Levi Zavala,fruitvale station,48,actor
+Jason Garcia,fruitvale station,49,actor
+William Armando,fruitvale station,50,actor
+Tristan Gray,fruitvale station,51,actor
+Ruben Rivera,fruitvale station,52,actor
+Kassandra Cesarm,fruitvale station,53,actor
+Israel Cesar,fruitvale station,54,actor
+Tatiyana Gomez,fruitvale station,55,actor
+Noah Zavala,fruitvale station,56,actor
+Maleah Nipay-Padilla,fruitvale station,57,actor
+Ryan Coogler,fruitvale station,0,director
+Michael B. Jordan,creed,1,actor
+Sylvester Stallone,creed,2,actor
+Tessa Thompson,creed,3,actor
+Phylicia Rashad,creed,4,actor
+Graham McTavish,creed,5,actor
+Wood Harris,creed,6,actor
+Ritchie Coster,creed,7,actor
+Tone Trump,creed,8,actor
+Brian Anthony Wilson,creed,9,actor
+Ryan Coogler,creed,0,director
+Michael B. Jordan,Creed 2 ,1,actor
+Sylvester Stallone,Creed 2 ,2,actor
+Tessa Thompson,Creed 2 ,3,actor
+Dolph Lundgren,Creed 2 ,4,actor
+"Florian ""Big Nasty"" Munteanu",Creed 2 ,5,actor
+Phylicia Rashad,Creed 2 ,6,actor
+Wood Harris,Creed 2 ,7,actor
+Andre Ward,Creed 2 ,8,actor
+Brigitte Nielsen,Creed 2 ,9,actor
+Milo Ventimiglia,Creed 2 ,10,actor
+Russell Hornsby,Creed 2 ,11,actor
+Ryan Coogler,Creed 2 ,0,director
+Sally Hawkins,the shape of water,1,actor
+Michael Shannon,the shape of water,2,actor
+Doug Jones,the shape of water,3,actor
+Richard Jenkins,the shape of water,4,actor
+Octavia Spencer,the shape of water,5,actor
+Michael Stuhlbarg,the shape of water,6,actor
+David Hewlett,the shape of water,7,actor
+Nick Searcy,the shape of water,8,actor
+Stewart Arnott,the shape of water,9,actor
+Nigel Bennett,the shape of water,10,actor
+Lauren Lee Smith,the shape of water,11,actor
+Martin Roach,the shape of water,12,actor
+Allegra Fulton,the shape of water,13,actor
+John Kapelos,the shape of water,14,actor
+Morgan Kelly,the shape of water,15,actor
+Guillermo del Toro,the shape of water,0,director
+Guillermo del Toro,crimson peak,0,director
+Guillermo del Toro,pacific rim,0,director
+Mia Wasikowska,crimson peak,1,actor
+Jessica Chastain,crimson peak,2,actor
+Tom Hiddleston,crimson peak,3,actor
+Charlie Hunnam,crimson peak,4,actor
+Jim Beaver,crimson peak,5,actor
+Burn Gorman,crimson peak,6,actor
+Jonathan Hyde,crimson peak,7,actor
+Leslie Hope,crimson peak,8,actor
+Sofia Wells,crimson peak,9,actor
+Doug Jones,crimson peak,10,actor
+Javier Botet,crimson peak,11,actor
+Charlie Hunnam,pacific rim,1,actor
+Idris Elba,pacific rim,2,actor
+Rinko Kikuchi,pacific rim,3,actor
+Charlie Day,pacific rim,4,actor
+Burn Gorman,pacific rim,5,actor
+Ron Perlman,pacific rim,6,actor
+Max Martini,pacific rim,7,actor
+Robert Kazinsky,pacific rim,8,actor
+Clifton Collins Jr.,pacific rim,9,actor
+Diego Klattenhoff,pacific rim,10,actor
+Ellen McLain,pacific rim,11,actor
+Steven S. DeKnight,pacific rim uprising,0,director
+John Boyega,pacific rim uprising,1,actor
+Scott Eastwood,pacific rim uprising,2,actor
+Cailee Spaeny,pacific rim uprising,3,actor
+Madeleine McGraw,pacific rim uprising,4,actor
+Burn Gorman,pacific rim uprising,5,actor
+Charlie Day,pacific rim uprising,6,actor
+Jing Tian,pacific rim uprising,7,actor
+Max Zhang,pacific rim uprising,8,actor
+Adria Arjona,pacific rim uprising,9,actor
+Rinko Kikuchi,pacific rim uprising,10,actor
+Karan Brar,pacific rim uprising,11,actor
+Wesley Wong,pacific rim uprising,12,actor
+Ivanna Sakhno,pacific rim uprising,13,actor
+Mackenyu,pacific rim uprising,14,actor
+Lily Ji,pacific rim uprising,15,actor
+Shyrley Rodriguez,pacific rim uprising,16,actor
+Rahart Adams,pacific rim uprising,17,actor
+Levi Meaden,pacific rim uprising,18,actor
